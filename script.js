@@ -307,6 +307,9 @@ var loadData = function() {
 	var deferred = new $.Deferred();
 	var req1 = $.getJSON("/api/v1/pods?labelSelector=visualize%3Dtrue", function( data ) {
 		pods = data;
+		if(!data.items) {
+			return
+		}	
 		$.each(data.items, function(key, val) {
     	val.type = 'pod';
       if (val.metadata.labels && val.metadata.labels.uses) {
